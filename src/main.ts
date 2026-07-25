@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -10,11 +11,20 @@ async function bootstrap() {
 
     app.use(helmet());
     app.setGlobalPrefix('api');
+
+    const configService = app.get(ConfigService);
+    const allowedOrigins = configService
+        .get<string>('CORS_ORIGINS', '')
+        .split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean);
+
     app.enableCors({
-        origin: process.env.ALLOWED_ORIGINS?.split(',').map((orig) => orig.trim()) ?? ['http://localhost:3000'],
+        origin: allowedOrigins,
         methods: 'POST, GET, PATCH, DELETE',
         credentials: true,
     });
+
     app.useGlobalPipes(
         new ValidationPipe({
             transform: true,
