@@ -25,6 +25,9 @@ export const envSchema = z
             .string()
             .min(5, 'Пароль админа должен содержать минимум 5 символов')
             .default('admin_password'),
+
+        CORS_ORIGINS: z.string(),
+        PORT: z.coerce.number(),
     })
     .passthrough();
 

@@ -49,7 +49,7 @@ snippet-manager-frontend/
 
 2. Переименовать файлы env (убрать .example) и указать значения переменных
 3. В папке бэкенда выполнить: `docker-compose up -d --build`
-4. API будет доступен по адресу `http://localhost:3000`
+4. API будет доступен по адресу `http://localhost:3002`
 
 ### Тестирование:
 
@@ -69,8 +69,8 @@ snippet-manager-frontend/
 
 ### Доступные ресурсы:
 
-- **API**: `http://localhost:3000`
-- **Swagger**: `http://localhost:3000/api-docs`
+- **API**: `http://localhost:3002`
+- **Swagger**: `http://localhost:3002/api-docs`
 
 ### Архитектура
 
