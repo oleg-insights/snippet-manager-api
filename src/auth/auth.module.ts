@@ -8,6 +8,7 @@ import { UsersModule } from 'src/users/users.module';
 
 @Module({
     imports: [JwtModule.register({ global: true }), PassportModule, UsersModule],
+    exports: [AuthService],
     controllers: [AuthController],
     providers: [AuthService, JwtStrategy],
 })

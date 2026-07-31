@@ -12,6 +12,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { NotificationsModule } from './notifications/notifications.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { DemoModule } from './demo/demo.module';
 
 @Module({
     imports: [
@@ -40,6 +41,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
         UsersModule,
         AdminModule,
         NotificationsModule,
+        DemoModule,
     ],
     providers: [
         {
