@@ -20,7 +20,7 @@ export class DemoService {
         const email = `${name}@demo.com`;
         const password = `${name}_p`;
 
-        return await this.prisma.$transaction(async (tx) => {
+        return await this.prisma.$transaction(async () => {
             await this.authService.registerUser({ name, email, password });
             const user: User = await this.authService.validateUser({ email, password });
             await this.usersService.updateUser(user.id, {
