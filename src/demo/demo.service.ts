@@ -22,17 +22,19 @@ export class DemoService {
 
         return await this.prisma.$transaction(async () => {
             await this.authService.registerUser({ name, email, password });
-            const user: User = await this.authService.validateUser({ email, password });
-            await this.usersService.updateUser(user.id, {
-                avatar: 'https://i.ibb.co/HDFC5Tyt/400x400-bgcolor-4590bf-textcolor-ffffff-text-D-fmt-png.png',
-            });
+            const user = await this.authService.validateUser({ email, password });
+
             const tokens = await this.authService.generateTokens(user.id, user.role);
             const { refreshToken, expiresAt } = tokens;
             await this.authService.createSession(user.id, refreshToken, expiresAt, userAgent, ip);
 
+            const userWithAvatar = await this.usersService.updateUser(user.id, {
+                avatar: 'https://i.ibb.co/HDFC5Tyt/400x400-bgcolor-4590bf-textcolor-ffffff-text-D-fmt-png.png',
+            });
+
             await this.fillDemoTemplates(user.id);
 
-            return { user, tokens };
+            return { user: userWithAvatar, tokens };
         });
     }
 
